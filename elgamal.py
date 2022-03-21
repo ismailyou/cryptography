@@ -1,33 +1,33 @@
-def is_generator(g, p):
+def is_generator(g: int, p: int):
     l = []
     for i in range(1, p):
         l.append(pow(g, i) % p)
     l.sort()
     return l
 
-def get_private_key(p, g, a):
+def get_private_key(p: int, g: int, a: int):
     return p, g, get_A(a, g, p)
 
-def get_A(a, g, p):
+def get_A(a: int, g: int, p: int):
     return pow(g, a) % p
 
 
-def encrypt(message,p, g, A, k):
+def encrypt(message: int,p: int, g: int, A: int, k: int):
     c1 = pow(g, k) % p
     c2 = message * pow(A,k) % p
     return c1, c2
 
-def decrypt(c1, c2, a, p):
+def decrypt(c1: int, c2: int, a: int, p: int):
 
     d = calcule_modulo(c1, a, p)
     iverce_d = get_inv_modulo(d, p)
 
     return (c2 *  iverce_d) % p
 
-def calcule_modulo(n, ex, mod):
+def calcule_modulo(n: int, ex: int, mod: int):
     return pow(n, ex) % mod
 
-def get_inv_modulo(p, mod):
+def get_inv_modulo(p: int, mod: int):
     a, b, c, d = mod, p, 1, 0
     while b != 1:
         temp_a, temp_b, temp_c, temp_d = a, b, c, d
